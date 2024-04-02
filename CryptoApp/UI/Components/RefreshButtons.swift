@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CircleButtonView: View {
+struct RefreshButton: View {
     let nameOfIcon: String
     var body: some View {
         Image(systemName: nameOfIcon)
@@ -20,8 +20,8 @@ struct CircleButtonView: View {
 
 #Preview {
     Group{
-        CircleButtonView(nameOfIcon: "arrow.clockwise.circle")
-        CircleButtonView(nameOfIcon: "arrow.clockwise.circle")
+        RefreshButton(nameOfIcon: "arrow.clockwise.circle")
+        RefreshButton(nameOfIcon: "arrow.clockwise.circle")
             .previewLayout(.sizeThatFits)
             .colorScheme(.dark)
         

@@ -81,7 +81,7 @@ extension HomeView {
                     }
                 }
             }) {
-                CircleButtonView(nameOfIcon: "arrow.clockwise")
+                RefreshButton(nameOfIcon: "arrow.clockwise")
             }
             .frame(alignment: .trailing)
         }
@@ -94,17 +94,20 @@ struct CoinInfoView: View{
     var body: some View{
         VStack{
             HStack{
-                Text("\(item.symbol): \(item.id.capitalized(with: .current))")
+                Text("\(item.symbol) \(item.id.capitalized(with: .current))")
                     .font(.title)
                 Spacer()
                 Text("\(String(format: "%.3f", Double(item.priceUsd)!))")
-                    .font(.headline)
+                    .font(.title)
             }
-            Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
+            .padding(40)
+
             VStack{
-                Text("Market Cap:\(String(format: "%.3f", Double(item.marketCapUsd)!))")
+                Text("Market Cap: \(String(format: "%.2f", Double(item.marketCapUsd)!))")
                 Text("Supply \(item.supply)")
             }
+            .padding(40)
+
         }
     }
 }
