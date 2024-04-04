@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-
 struct HomeView: View {
     @StateObject private var vm = HomeViewModel()
     @State private var isPresentingDetail = false
-    @State private var selectedItem: CoinInfo?
-
+    @State private var selectedItem: CoinModel?
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -23,40 +22,50 @@ struct HomeView: View {
                         Button(action: {
                             self.selectedItem = item
                             self.isPresentingDetail = true
-                        }) {
+                        })
+                        {
                             HStack {
-                                Text(item.symbol)
+                                AsyncImage(url: URL(string: item.image)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                .frame(width: 30, height: 30)
+                                
+                                Text(item.symbol.uppercased())
                                     .bold()
                                 Spacer()
-                                Text("$ \(String(format: "%.3f", Double(item.priceUsd)!))")
+                                Text("$ \(String(format: "%.3f", item.currentPrice))")
                             }
                         }
                     }
                     
-                    
-                    .listStyle(.automatic)
-                    .task {
-                        vm.startAutoRefresh()
-                    }
-                    .onAppear(perform: {
-                        Task {
-                            do {
-                                print("pressed the button")
-                                try await vm.refreshView()
-                            } catch {
-                                print("Error refreshing view: \(error)")
-                            }
+                }
+                
+                .listStyle(.automatic)
+                .task {
+                    vm.startAutoRefresh()
+                }
+                .onAppear(perform: {
+                    Task {
+                        do {
+                            print("done automatic refresh crypto info")
+                            try await vm.refreshView()
+                        } catch {
+                            print("Error refreshing view: \(error)")
                         }
-                    })
-                    .sheet(item: $selectedItem) { item in
-                        CoinInfoView(item: item)
                     }
+                })
+                .sheet(item: $selectedItem) { item in
+                    CoinInfoView(item: item)
                 }
             }
         }
     }
-    
 }
+    
 
 
 #Preview {
@@ -74,7 +83,7 @@ extension HomeView {
             Button(action: {
                 Task {
                     do {
-                        print("pressed the button")
+                        print("pressed a refresh button")
                         try await vm.refreshView()
                     } catch {
                         print("Error refreshing view: \(error)")
@@ -90,21 +99,21 @@ extension HomeView {
 }
 
 struct CoinInfoView: View{
-    @State var item: CoinInfo
+    @State var item: CoinModel
     var body: some View{
         VStack{
             HStack{
                 Text("\(item.symbol) \(item.id.capitalized(with: .current))")
                     .font(.title)
                 Spacer()
-                Text("\(String(format: "%.3f", Double(item.priceUsd)!))")
+                Text("\(String(format: "%.3f", item.currentPrice))")
                     .font(.title)
             }
             .padding(40)
 
             VStack{
-                Text("Market Cap: \(String(format: "%.2f", Double(item.marketCapUsd)!))")
-                Text("Supply \(item.supply)")
+                Text("Market Cap: \(item.marketCap)")
+                Text("Supply \(item.totalSupply!)")
             }
             .padding(40)
 

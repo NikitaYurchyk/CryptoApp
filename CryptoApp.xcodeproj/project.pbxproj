@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		110916E92BBB0BC200A17D3A /* CryptoAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110916E82BBB0BC200A17D3A /* CryptoAppApp.swift */; };
+		110916E92BBB0BC200A17D3A /* CryptoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110916E82BBB0BC200A17D3A /* CryptoApp.swift */; };
 		110916EB2BBB0BC200A17D3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110916EA2BBB0BC200A17D3A /* ContentView.swift */; };
 		110916ED2BBB0BC500A17D3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110916EC2BBB0BC500A17D3A /* Assets.xcassets */; };
 		110916F02BBB0BC500A17D3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 110916EF2BBB0BC500A17D3A /* Preview Assets.xcassets */; };
@@ -26,7 +26,7 @@
 
 /* Begin PBXFileReference section */
 		110916E52BBB0BC200A17D3A /* CryptoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		110916E82BBB0BC200A17D3A /* CryptoAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAppApp.swift; sourceTree = "<group>"; };
+		110916E82BBB0BC200A17D3A /* CryptoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoApp.swift; sourceTree = "<group>"; };
 		110916EA2BBB0BC200A17D3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		110916EC2BBB0BC500A17D3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		110916EF2BBB0BC500A17D3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				110916FC2BBB0C8900A17D3A /* UI */,
 				110916F92BBB0C2C00A17D3A /* Networks */,
 				110916F62BBB0BEE00A17D3A /* Models */,
-				110916E82BBB0BC200A17D3A /* CryptoAppApp.swift */,
+				110916E82BBB0BC200A17D3A /* CryptoApp.swift */,
 				110916EA2BBB0BC200A17D3A /* ContentView.swift */,
 				110916EC2BBB0BC500A17D3A /* Assets.xcassets */,
 				110916EE2BBB0BC500A17D3A /* Preview Content */,
@@ -290,7 +290,7 @@
 				110916FB2BBB0C3C00A17D3A /* CoinClient.swift in Sources */,
 				1188A8592BBC66BE00BBA0C6 /* AppFlowScreen.swift in Sources */,
 				110916F82BBB0C1A00A17D3A /* CoinModel.swift in Sources */,
-				110916E92BBB0BC200A17D3A /* CryptoAppApp.swift in Sources */,
+				110916E92BBB0BC200A17D3A /* CryptoApp.swift in Sources */,
 				1188A8542BBC43BE00BBA0C6 /* LoginView.swift in Sources */,
 				1188A8602BBC749800BBA0C6 /* RegisterView.swift in Sources */,
 				110917012BBB0CD800A17D3A /* RefreshButtons.swift in Sources */,

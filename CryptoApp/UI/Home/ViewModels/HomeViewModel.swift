@@ -8,27 +8,46 @@ import SwiftUI
 
 extension HomeView {
     @MainActor class HomeViewModel: ObservableObject {
-        @Published var data = [CoinInfo]()
+        @Published var data = [CoinModel]()
         @Published var searchBar = ""
         
+        
         func refreshView() async throws {
+            guard !isRateLimited() else {
+                print("Fetch skipped due to rate limiting.")
+                return
+            }
+            
             do {
-                let rates = try await fetchDataForAllCoins(preview: true)
+                let rates = try await fetchDataForAllCoins(preview: false)
                 withAnimation {
-                    self.data = rates.data
+                    self.data = rates
                 }
-                print("Number of entries fetched: ", self.data.count)
             } catch {
                 print("Error fetching data: \(error)")
             }
         }
         
+        private func isRateLimited() -> Bool {
+            let defaults = UserDefaults.standard
+            let lastFetchKey = "lastFetchTime"
+            if let lastFetch = defaults.object(forKey: lastFetchKey) as? Date {
+                if Date().timeIntervalSince(lastFetch) < 300 {
+                    return true
+                }
+            }
+            defaults.set(Date(), forKey: lastFetchKey)
+            return false
+        }
+        
+        
         func startAutoRefresh() {
             Task {
                 while true {
-                    try await reloadData()
                     do {
-                        try await Task.sleep(nanoseconds: 30 * 1_000_000_000)
+                        print("Call")
+                        try await refreshView()
+                        try await Task.sleep(nanoseconds: 300 * 1_000_000_000)
                     } catch {
                         print("Sleep interrupted: \(error)")
                         break
@@ -37,19 +56,16 @@ extension HomeView {
             }
         }
         
-        func reloadData() async throws {
-            let rates = try await fetchDataForAllCoins(preview: true)
-            withAnimation {
-                print("Data updated")
-                self.data = rates.data
+        var filteredRates: [CoinModel] {
+            return searchBar.isEmpty ? data : data.filter {
+                let result = $0.symbol.contains(searchBar.lowercased())
+                return result
             }
         }
-        
-        
-        var filteredRates: [CoinInfo] {
-            searchBar.isEmpty ? data : data.filter { $0.symbol.contains(searchBar.uppercased()) }
-        }
     }
-    
-    
 }
+
+        
+    
+    
+

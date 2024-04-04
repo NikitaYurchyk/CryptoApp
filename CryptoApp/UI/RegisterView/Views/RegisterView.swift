@@ -24,8 +24,8 @@ struct RegisterView: View {
             .padding(.horizontal, 30)
         }
         .textFieldStyle(.roundedBorder)
-        .offset(y:180)
         .navigationTitle("Registration")
+        .offset(y:180)
 
     }
 }

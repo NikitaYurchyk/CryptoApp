@@ -26,6 +26,7 @@ struct LoginView: View {
         }
         .padding(30)
         .textFieldStyle(.roundedBorder)
+        .navigationTitle("Login")
         .offset(y:180)
 
     }

@@ -22,8 +22,6 @@ struct AuthFlowScreen: View {
                         RegisterView(onRegister: onComplete)
                     }
                 }
-            
-            
         }
     }
 
